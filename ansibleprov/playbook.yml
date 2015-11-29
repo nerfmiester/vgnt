@@ -1,0 +1,33 @@
+- hosts: all
+  sudo: true
+  tasks:
+
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Install nodejs
+      apt: name=nodejs state=present
+
+    - name: Install lynx
+      apt: name=lynx-cur state=present
+
+    - name: Add ppa repo
+      apt_repository: repo='ppa:brightbox/ruby-ng'
+
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: Add ruby 2.1
+      apt: name=ruby2.1 state=present
+
+    - name: Install ruby2.1-dev
+      apt: name=ruby2.1-dev state=present
+
+    - name: Install Ruby Switch
+      apt: name=ruby-switch state=present
+
+    - name: switch rubies
+      shell: ruby-switch --set ruby2.1
+
+    - name: Install Jekyll
+      shell: 'gem install jekyll'
